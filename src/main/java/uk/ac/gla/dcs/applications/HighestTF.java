@@ -2,6 +2,8 @@ package uk.ac.gla.dcs.applications;
 
 import org.terrier.applications.CLITool;
 import org.terrier.structures.Index;
+import org.terrier.structures.Lexicon;
+import org.terrier.structures.LexiconEntry;
 import org.terrier.terms.PorterStemmer;
 
 /**
@@ -15,7 +17,6 @@ public class HighestTF extends CLITool {
 
     @Override
     public int run(String[] args) throws Exception {
-
         if (args.length != 1) {
             System.err.println("Usage: " + this.commandname() + " term");
             System.err.println(this.helpsummary());
@@ -27,13 +28,16 @@ public class HighestTF extends CLITool {
 
         Index index = Index.createIndex();
 
-        String docno = "TODO";
-        // TODO: tell us the docno of the document that
         // has the highest term frequency for the specified term
         // You may refer to a useful part of the Terrier documentation
         // https://github.com/terrier-org/terrier-core/blob/5.x/doc/extend_retrieval.md#using-terrier-indices-in-your-own-code
-
-        System.out.println(docno);
+        Lexicon<String> lex = index.getLexicon();
+        LexiconEntry le = lex.getLexiconEntry("term");
+        if (le != null) {
+            System.out.println("Term term occurs in " + le.getDocumentFrequency() + " documents");
+        } else {
+            System.out.println("Term term does not occur");
+        }
         
         //leave this is as.
         return 0;
