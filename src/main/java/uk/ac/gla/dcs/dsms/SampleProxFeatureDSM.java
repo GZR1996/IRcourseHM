@@ -8,7 +8,7 @@ import org.terrier.matching.dsms.DependenceScoreModifier;
  * TODO: Describe the function that your class implements
  * <p>
  * You can add your feature into a learned model by appending DSM:uk.ac.gla.IRcourse.SampleProxFeatureDSM to the features.list file.
- * @author TODO
+ * @author Zirun Gan
  */
 public class SampleProxFeatureDSM extends DependenceScoreModifier {
 

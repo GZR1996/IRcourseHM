@@ -27,7 +27,7 @@ public class TestMyWeightingModel extends ApplicationSetupBasedTest {
 						"Exploring the zoo, we saw every kangaroo jump and quite a few carried babies.",
 						"Sneaky white tiger creeps up on a visitor at a zoo before launching a lightning attack" });
 
-		WeightingModel wm = new MyWeightingModel();
+		WeightingModel wm = new VectorSpaceModel();
 		wm.setCollectionStatistics(index.getCollectionStatistics());
 		// double check: our index has two documents
 		assertEquals(3, index.getCollectionStatistics().getNumberOfDocuments());

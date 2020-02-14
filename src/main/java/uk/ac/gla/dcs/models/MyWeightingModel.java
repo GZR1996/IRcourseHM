@@ -1,13 +1,18 @@
 package uk.ac.gla.dcs.models;
 
+import org.terrier.matching.MatchingQueryTerms;
 import org.terrier.matching.models.WeightingModel;
+import org.terrier.structures.*;
+import org.terrier.structures.postings.IterablePosting;
 import org.terrier.structures.postings.Posting;
+
+import java.util.Map;
 
 /** You should use this sample class to implement a Simple TF*IDF weighting model for Exercise 1
   * of the exercise. You can tell Terrier to use your weighting model by specifying the 
   * -w commandline option, or the property trec.model=uk.ac.gla.dcs.models.MyWeightingModel.
   * NB: There is a corresponding unit test that you should also complete to test your model.
-  * @author TODO
+  * @author Zirun Gan
   */
 public class MyWeightingModel extends WeightingModel
 {
@@ -56,10 +61,18 @@ public class MyWeightingModel extends WeightingModel
    		//termFrequency (The frequency of the term in the collection)
    		//numberOfDocuments (The number of documents in the collection)
 		//numberOfTokens (the total length of all documents in the collection)
-		//as well as any member variables you create   
+		//as well as any member variables you create
+		double numberOfTokens = this.numberOfTokens;
+		double numberOfDocuments = this.numberOfDocuments;
+		double averageDocumentLength = numberOfTokens / numberOfDocuments;
+		double documentFrequency = this.documentFrequency;
+		double termFrequency = this.termFrequency;
+		double idf = Math.log10((numberOfDocuments - termFrequency + 0.5));
+		idf /= termFrequency + 0.5;
+		tf = Math.log(tf) / Math.log(2);
+		double score = 1 + tf * idf;
 
-
-		return 0d;
+		return score;
 	}
 
 	@Override
