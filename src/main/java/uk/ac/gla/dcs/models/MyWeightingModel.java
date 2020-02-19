@@ -19,6 +19,8 @@ public class MyWeightingModel extends WeightingModel
 	private static final long serialVersionUID = 1L;
 
 	public String getInfo() { return this.getClass().getSimpleName(); }
+
+	private static final double LOG_2 = Math.log(2);
 	
 	boolean init = false;
 	
@@ -62,16 +64,12 @@ public class MyWeightingModel extends WeightingModel
    		//numberOfDocuments (The number of documents in the collection)
 		//numberOfTokens (the total length of all documents in the collection)
 		//as well as any member variables you create
-		double numberOfTokens = this.numberOfTokens;
 		double numberOfDocuments = this.numberOfDocuments;
-		double averageDocumentLength = numberOfTokens / numberOfDocuments;
 		double documentFrequency = this.documentFrequency;
-		double termFrequency = this.termFrequency;
-		double idf = Math.log10((numberOfDocuments - termFrequency + 0.5));
-		idf /= termFrequency + 0.5;
-		tf = Math.log(tf) / Math.log(2);
+		double idf = Math.log10((numberOfDocuments - documentFrequency + 0.5));
+		idf /= documentFrequency + 0.5;
+		tf = Math.log(tf) / LOG_2;
 		double score = (1 + tf) * idf;
-
 		return score;
 	}
 

@@ -43,7 +43,7 @@ public class TestMyWeightingModel extends ApplicationSetupBasedTest {
 		wm.setKeyFrequency(1.0d);
 		wm.prepare();
 		wm.setRequest((Request)srq);
-		double score = wm.score(new BasicPostingImpl(1, 1) {
+		double score = wm.score(new BasicPostingImpl(0, 1) {
 			public int getDocumentLength() { return 5; }
 		});
 		System.out.println(score);
