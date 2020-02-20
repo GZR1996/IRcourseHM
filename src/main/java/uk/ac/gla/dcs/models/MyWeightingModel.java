@@ -69,7 +69,7 @@ public class MyWeightingModel extends WeightingModel
 		double idf = Math.log10((numberOfDocuments - documentFrequency + 0.5));
 		idf /= documentFrequency + 0.5;
 		tf = Math.log10(tf);
-		double score = (1 + tf) * idf;
+		double score = 1 + tf * idf;
 		return score;
 	}
 
