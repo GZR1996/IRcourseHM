@@ -20,12 +20,14 @@ public class TestSampleProxFeatureDSM extends ApplicationSetupBasedTest
 		ApplicationSetup.setProperty("termpipelines", "");
 		Index index = IndexTestUtils.makeIndexBlocks(
 				new String[]{"doc1"}, 
-				new String[]{"The quick brown fox jumps over the lazy dog"});
+				new String[]{
+						"It doesn’t matter if your sentence didn’t use perfect grammar, as long as the person you were speaking to understood what you meant in your sentence.",
+				});
 
 		//get posting iterators for two terms 'fox' and 'jumps'
 		IterablePosting[] ips = new IterablePosting[2];
-		ips[0] = index.getInvertedIndex().getPostings(index.getLexicon().getLexiconEntry("fox"));
-		ips[1] = index.getInvertedIndex().getPostings(index.getLexicon().getLexiconEntry("jumps"));
+		ips[0] = index.getInvertedIndex().getPostings(index.getLexicon().getLexiconEntry("sentence"));
+		ips[1] = index.getInvertedIndex().getPostings(index.getLexicon().getLexiconEntry("your"));
 		ips[0].next();
 		ips[1].next();
 		assertEquals(0, ips[0].getId());
@@ -33,7 +35,7 @@ public class TestSampleProxFeatureDSM extends ApplicationSetupBasedTest
 		System.out.println("Positions of term 'fox'="+ Arrays.toString( ((BlockPosting)ips[0]).getPositions()));
 		System.out.println("Positions of term 'jumps'="+ Arrays.toString( ((BlockPosting)ips[1]).getPositions()));
 
-		SampleProxFeatureDSM sample = new SampleProxFeatureDSM();
+		DependenceScoreModifier1 sample = new DependenceScoreModifier1();
 		double score = sample.calculateDependence(
             ips, //posting lists
             new boolean[]{true,true},  //is this posting list on the correct document?

@@ -1,14 +1,12 @@
 package uk.ac.gla.dcs.models;
 
 import org.terrier.matching.models.WeightingModel;
-import org.terrier.querying.*;
 import org.terrier.structures.*;
 import org.terrier.structures.postings.IterablePosting;
 import org.terrier.structures.postings.Posting;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.Callable;
 
 /** You should use this sample class to implement a Simple TF*IDF weighting model for Exercise 1
  * of the exercise. You can tell Terrier to use your weighting model by specifying the
